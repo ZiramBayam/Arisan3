@@ -1,0 +1,161 @@
+import type {
+  ArisanDetail,
+  EventLogItem,
+  PortfolioItem,
+} from "./api";
+
+export const MOCK_ARISAN: ArisanDetail = {
+  id: "1",
+  name: "Arisan Kantor Q3",
+  state: "ACTIVE",
+  currentPeriod: 2,
+  iuranAmount: "50000000",
+  periodDeadline: Math.floor(Date.now() / 1000) + 60 * 60 * 28,
+  maxMembers: 6,
+  organizer: "0xA11CE0000000000000000000000000000000A11C",
+  members: [
+    {
+      address: "0xA11CE0000000000000000000000000000000A11C",
+      slotIndex: 0,
+      paidThisPeriod: true,
+    },
+    {
+      address: "0xB0B1234567890ABCdef1234567890aBcDef12345",
+      slotIndex: 1,
+      paidThisPeriod: true,
+    },
+    {
+      address: "0xC4ROL999999999999999999999999999999999C4",
+      slotIndex: 2,
+      paidThisPeriod: false,
+    },
+    {
+      address: "0xDA77A11111111111111111111111111111111DAF",
+      slotIndex: 3,
+      paidThisPeriod: true,
+    },
+    {
+      address: "0xEEEEEFFFFFFEEEEEFFFFFFEEEEEFFFFFFEEEEEEE",
+      slotIndex: 4,
+      paidThisPeriod: false,
+    },
+    {
+      address: "0xFADE1234567890ABCdef1234567890aBcDef0123",
+      slotIndex: 5,
+      paidThisPeriod: true,
+    },
+  ],
+  winnerHistory: [
+    {
+      period: 0,
+      winner: "0xA11CE0000000000000000000000000000000A11C",
+      amount: "298500000",
+    },
+    {
+      period: 1,
+      winner: "0xDA77A11111111111111111111111111111111DAF",
+      amount: "298500000",
+    },
+  ],
+};
+
+export const MOCK_HISTORY: EventLogItem[] = [
+  {
+    id: "evt-1",
+    type: "ArisanCreated",
+    arisanId: "1",
+    actor: "0xA11CE0000000000000000000000000000000A11C",
+    txHash: "0xabc1234567890",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 30,
+  },
+  {
+    id: "evt-2",
+    type: "MemberJoined",
+    arisanId: "1",
+    actor: "0xB0B1234567890ABCdef1234567890aBcDef12345",
+    txHash: "0xabc1234567891",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 29,
+  },
+  {
+    id: "evt-3",
+    type: "ArisanStarted",
+    arisanId: "1",
+    txHash: "0xabc1234567892",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 25,
+  },
+  {
+    id: "evt-4",
+    type: "WinnerSelected",
+    arisanId: "1",
+    actor: "0xA11CE0000000000000000000000000000000A11C",
+    period: 0,
+    amount: "298500000",
+    txHash: "0xabc1234567893",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 18,
+  },
+  {
+    id: "evt-5",
+    type: "FundsClaimed",
+    arisanId: "1",
+    actor: "0xA11CE0000000000000000000000000000000A11C",
+    amount: "298500000",
+    txHash: "0xabc1234567894",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 17,
+  },
+  {
+    id: "evt-6",
+    type: "IuranDeposited",
+    arisanId: "1",
+    actor: "0xDA77A11111111111111111111111111111111DAF",
+    period: 1,
+    amount: "50000000",
+    txHash: "0xabc1234567895",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 12,
+  },
+  {
+    id: "evt-7",
+    type: "WinnerSelected",
+    arisanId: "1",
+    actor: "0xDA77A11111111111111111111111111111111DAF",
+    period: 1,
+    amount: "298500000",
+    txHash: "0xabc1234567896",
+    timestamp: Math.floor(Date.now() / 1000) - 86400 * 4,
+  },
+];
+
+export const MOCK_PORTFOLIO: PortfolioItem[] = [
+  {
+    arisanId: "1",
+    name: "Arisan Kantor Q3",
+    state: "ACTIVE",
+    role: "ORGANIZER",
+    iuranAmount: "50000000",
+    currentPeriod: 2,
+    periodDeadline: Math.floor(Date.now() / 1000) + 60 * 60 * 28,
+    totalContributed: "100000000",
+    paidThisPeriod: true,
+  },
+  {
+    arisanId: "2",
+    name: "Arisan Teman Kuliah",
+    state: "ACTIVE",
+    role: "MEMBER",
+    iuranAmount: "25000000",
+    currentPeriod: 4,
+    periodDeadline: Math.floor(Date.now() / 1000) + 60 * 60 * 70,
+    totalContributed: "100000000",
+    paidThisPeriod: false,
+  },
+  {
+    arisanId: "3",
+    name: "Arisan Keluarga",
+    state: "COMPLETED",
+    role: "MEMBER",
+    iuranAmount: "100000000",
+    currentPeriod: 8,
+    periodDeadline: Math.floor(Date.now() / 1000) - 60 * 60 * 24 * 14,
+    totalContributed: "800000000",
+    paidThisPeriod: true,
+  },
+];

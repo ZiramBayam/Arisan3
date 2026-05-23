@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("/fonts/GoogleSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/fonts/GoogleSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/fonts/GoogleSans-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/fonts/GoogleSans-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Google Sans";
+  src: url("/fonts/GoogleSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+:root {
+  --font-sans: "Google Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+:root {
+  /* Light theme — prime cream surfaces, dark ink text */
+  --c-prime: 252 251 244;
+  --c-prime-50: 255 255 255;
+  --c-prime-100: 254 254 251;
+  --c-prime-200: 252 251 244;
+  --c-prime-300: 245 243 229;
+  --c-prime-400: 234 230 207;
+  --c-ink: 14 20 17;
+  --c-ink-muted: 86 97 90;
+  --c-ink-subtle: 138 147 141;
+  --c-accent-50: 232 248 238;
+  --c-accent-600: 21 136 60;
+  --c-shadow: 14 20 17;
+}
+
+[data-theme="dark"] {
+  /* Dark theme — deep ink surfaces, prime cream text */
+  --c-prime: 14 20 17;
+  --c-prime-50: 9 13 11;
+  --c-prime-100: 26 32 29;
+  --c-prime-200: 20 25 22;
+  --c-prime-300: 30 36 33;
+  --c-prime-400: 42 49 45;
+  --c-ink: 252 251 244;
+  --c-ink-muted: 175 184 178;
+  --c-ink-subtle: 110 119 114;
+  --c-accent-50: 21 50 32;
+  --c-accent-600: 95 208 136;
+  --c-shadow: 0 0 0;
+}
+
+html,
+body {
+  background-color: rgb(var(--c-prime));
+  color: rgb(var(--c-ink));
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  color-scheme: light;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+}
+
+@layer base {
+  body {
+    @apply font-sans;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-accent px-5 py-3 text-sm font-semibold text-white shadow-soft transition hover:bg-accent-500 active:scale-[0.98] disabled:cursor-not-allowed disabled:bg-ink-subtle disabled:opacity-60;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink/10 bg-prime px-5 py-3 text-sm font-semibold text-ink shadow-soft transition hover:border-accent hover:text-accent active:scale-[0.98];
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-medium text-ink-muted transition hover:bg-prime-300 hover:text-ink;
+  }
+  .card {
+    @apply rounded-2xl border border-ink/5 bg-prime-100 p-6 shadow-soft;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-prime-300 px-3 py-1 text-xs font-medium text-ink-muted;
+  }
+  .chip-accent {
+    @apply inline-flex items-center gap-1.5 rounded-full bg-accent-50 px-3 py-1 text-xs font-semibold text-accent-600;
+  }
+  .input {
+    @apply w-full rounded-xl border border-ink/10 bg-prime px-4 py-3 text-sm text-ink placeholder:text-ink-subtle focus:border-accent focus:outline-none focus:ring-4 focus:ring-accent/15;
+  }
+  .label {
+    @apply mb-1.5 block text-xs font-semibold uppercase tracking-wider text-ink-muted;
+  }
+  .grid-paper {
+    background-image:
+      linear-gradient(to right, rgba(14, 20, 17, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(14, 20, 17, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  [data-theme="dark"] .grid-paper {
+    background-image:
+      linear-gradient(to right, rgba(252, 251, 244, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(252, 251, 244, 0.05) 1px, transparent 1px);
+  }
+}
+
+/* Splash overlay uses Tailwind classes inline in SplashScreen.tsx — the
+   `clip-path: circle()` reveal layer is GPU-accelerated and animates the
+   same way on every modern browser, so no special @property registration
+   or mask-image trick is needed here. */
