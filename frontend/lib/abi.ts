@@ -18,9 +18,6 @@ export const arisanFactoryAbi = [
     ],
     outputs: [{ name: "arisanId", type: "uint256" }],
   },
-] as const;
-
-export const arisanPoolAbi = [
   {
     type: "function",
     name: "join",
@@ -60,6 +57,134 @@ export const arisanPoolAbi = [
     outputs: [{ name: "", type: "uint256" }],
   },
   {
+    type: "function",
+    name: "state",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "uint8" }],
+  },
+  {
+    type: "function",
+    name: "currentPeriod",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+  {
+    type: "function",
+    name: "periodStartTimestamp",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+  {
+    type: "function",
+    name: "vrfPending",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "bool" }],
+  },
+  {
+    type: "function",
+    name: "getMembers",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "address[]" }],
+  },
+  {
+    type: "function",
+    name: "getWinnerHistory",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [{ name: "", type: "address[]" }],
+  },
+  {
+    type: "function",
+    name: "isMember",
+    stateMutability: "view",
+    inputs: [
+      { name: "arisanId", type: "uint256" },
+      { name: "account", type: "address" },
+    ],
+    outputs: [{ name: "", type: "bool" }],
+  },
+  {
+    type: "function",
+    name: "config",
+    stateMutability: "view",
+    inputs: [{ name: "arisanId", type: "uint256" }],
+    outputs: [
+      { name: "organizer", type: "address" },
+      { name: "iuranAmount", type: "uint256" },
+      { name: "periodDuration", type: "uint256" },
+      { name: "maxMembers", type: "uint256" },
+      { name: "gracePeriodSeconds", type: "uint256" },
+    ],
+  },
+  {
+    type: "function",
+    name: "paidPeriods",
+    stateMutability: "view",
+    inputs: [
+      { name: "arisanId", type: "uint256" },
+      { name: "member", type: "address" },
+      { name: "period", type: "uint256" },
+    ],
+    outputs: [{ name: "", type: "bool" }],
+  },
+  {
+    type: "function",
+    name: "periodCollected",
+    stateMutability: "view",
+    inputs: [
+      { name: "arisanId", type: "uint256" },
+      { name: "period", type: "uint256" },
+    ],
+    outputs: [{ name: "", type: "uint256" }],
+  },
+  {
+    type: "event",
+    name: "ArisanStarted",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "timestamp", type: "uint256", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "IuranDeposited",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "member", type: "address", indexed: false },
+      { name: "period", type: "uint256", indexed: false },
+      { name: "amount", type: "uint256", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "RandomnessRequested",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "vrfRequestId", type: "uint256", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "FundsClaimed",
+    inputs: [
+      { name: "recipient", type: "address", indexed: true },
+      { name: "amount", type: "uint256", indexed: false },
+    ],
+  },
+  {
+    type: "event",
+    name: "ArisanCompleted",
+    inputs: [
+      { name: "id", type: "uint256", indexed: true },
+      { name: "timestamp", type: "uint256", indexed: false },
+    ],
+  },
+  {
     type: "event",
     name: "ArisanCreated",
     inputs: [
@@ -90,6 +215,8 @@ export const arisanPoolAbi = [
     ],
   },
 ] as const;
+
+export const arisanPoolAbi = arisanFactoryAbi;
 
 export const erc20Abi = [
   {
